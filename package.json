@@ -1,12 +1,12 @@
 {
   "name": "react_app",
+  "homepage": "http://RobsonEgute.github.io/FCC-25-5-clock-Timer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "gh-pages": "^3.2.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
@@ -14,8 +14,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "predeploy": "npm run build",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "predeploy": "npm run --openssl-legacy-provider build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -38,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }

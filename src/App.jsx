@@ -1,60 +1,60 @@
 import { useState, useEffect, useRef, Component } from "react";
 import "./App.css";
-var t;
+let t;
 
 // change variable names accordingly
 
 class App extends Component {
   state = {
-    timerOn: false,
+    isTimerOn: false,
     break: false,
-    timer: 1500,
-    breakTime:5,
-    sessionTime: 25
+    timerInSec: 1500,
+    breakTimeInSec:5,
+    sessionTimeInSec: 25
   }
 
   audio = document.getElementsByTagName('audio')[0]
 
    handleBreakDec = () => {
-    if (this.state.breakTime <= 1 || this.state.breakTime > 60) return;
-    this.setState({breakTime : this.state.breakTime - 1});
+    if (this.state.breakTimeInSec <= 1 || this.state.breakTimeInSec > 60) return;
+    this.setState({breakTimeInSec : this.state.breakTimeInSec - 1});
   };
    handleBreakInc = () => {
     if (this.state.breakLength < 1 || this.state.breakLength >= 60) return;
-    this.setState({breakTime : this.state.breakTime + 1});
+    this.setState({breakTimeInSec : this.state.breakTimeInSec + 1});
   };
    handleSessionDec = () => {
-    if (this.state.sessionTime <= 1 || this.state.sessionTime > 60) return;
-    this.setState({sessionTime: this.state.sessionTime - 1})
+    if (this.state.sessionTimeInSec <= 1 || this.state.sessionTimeInSec > 60) return;
+    this.setState({sessionTimeInSec: this.state.sessionTimeInSec - 1})
   };
    handleSessionInc = () => {
-    if (this.state.sessionTime < 1 || this.state.sessionTime >= 60) return;
-    this.setState({sessionTime: this.state.sessionTime + 1})
+    if (this.state.sessionTimeInSec < 1 || this.state.sessionTimeInSec >= 60) return;
+    this.setState({sessionTimeInSec: this.state.sessionTimeInSec + 1})
   };
 
 
   startStopTimer = () => {
-    if (this.state.timerOn === true) {
+    if (this.state.isTimerOn === true) {
       console.log(this.state);
-      this.setState({ timerOn: false});
-      clearInterval(this.timer);
-    } else if (this.state.timerOn === false) {
-      this.setState({ timerOn: true });
-      if (this.state.timer > 0) {
+      this.setState({ isTimerOn: false});
+      clearInterval(this.timerInSec);
+    } else if (this.state.isTimerOn === false) {
+      this.setState({ isTimerOn: true });
+      if (this.state.timerInSec > 0) {
         this.timer = setInterval(() => {
-          let currTimer = this.state.timer;
+          let currTimer = this.state.timerInSec;
           let breakStatus = this.state.break;
           if (currTimer > 0) {
             currTimer -= 1;
           } else if (currTimer === 0 && breakStatus === false) {
-            currTimer = this.state.breakTime * 60;
+            currTimer = this.state.breakTimeInSec * 60;
             breakStatus = true;
           } else if (currTimer === 0 && breakStatus === true) {
-            currTimer = this.state.sessionTime * 60;
+            currTimer = this.state.sessionTimeInSec * 60;
             breakStatus = false;
           }
           this.setState({
-            timer: currTimer,
+            timerInSec: currTimer,
             break: breakStatus
           });
         }, 1000);
@@ -65,13 +65,13 @@ class App extends Component {
 
   reset = () => {
     this.setState({
-      timerOn: false,
+      isTimerOn: false,
       break: false,
-      timer: 1500,
-      breakTime: 5,
-      sessionTime: 25,
+      timerInSec: 1500,
+      breakTimeInSec: 5,
+      sessionTimeInSec: 25,
     });
-    clearInterval(this.timer);
+    clearInterval(this.timerInSec);
     let beep = document.getElementsByTagName('audio')[0];
     beep.pause();
     beep.currentTime = 0;
@@ -80,20 +80,20 @@ class App extends Component {
   
   
   render() {
-    let minute = Math.floor(this.state.timer / 60);
-    let second = this.state.timer % 60;
+    let minute = Math.floor(this.state.timerInSec / 60);
+    let second = this.state.timerInSec % 60;
 
   return (
     <>
       <div className="container">
-        <p>25 + 5 Clock</p>
+        <p>25 + 5 Clock TImer</p>
         <div className="controls">
           <div id="break">
             <div id="break-label">Break Length</div>
             <span id="break-decrement" onClick={this.handleBreakDec}>
               -
             </span>
-            <span id="break-length">{this.state.breakTime}</span>
+            <span id="break-length">{this.state.breakTimeInSec}</span>
             <span id="break-increment" onClick={this.handleBreakInc}>
               +
             </span>
@@ -103,7 +103,7 @@ class App extends Component {
             <span id="session-decrement" onClick={this.handleSessionDec}>
               -
             </span>
-            <span id="session-length">{this.state.sessionTime}</span>
+            <span id="session-length">{this.state.sessionTimeInSec}</span>
             <span id="session-increment" onClick={this.handleSessionInc}>
               +
             </span>
@@ -115,7 +115,7 @@ class App extends Component {
             <div id="timer-left">
               {minute?.toString().length === 1
                 ? `0${minute}`
-                : minute || this.state.sessionTime}
+                : minute || this.state.sessionTimeInSec}
               :{second?.toString().length === 1 ? `0${second}` : second || 0}
             </div>
           </div>
