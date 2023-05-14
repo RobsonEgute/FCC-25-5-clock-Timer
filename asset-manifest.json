@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FCC-25-5-clock-Timer/static/css/main.4a816dec.css",
+    "main.js": "/FCC-25-5-clock-Timer/static/js/main.c6715368.js",
+    "index.html": "/FCC-25-5-clock-Timer/index.html",
+    "main.4a816dec.css.map": "/FCC-25-5-clock-Timer/static/css/main.4a816dec.css.map",
+    "main.c6715368.js.map": "/FCC-25-5-clock-Timer/static/js/main.c6715368.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a816dec.css",
+    "static/js/main.c6715368.js"
+  ]
+}
